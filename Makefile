@@ -1,8 +1,5 @@
-GOPKG ?=	moul.io/golang-repo-template
-DOCKER_IMAGE ?=	moul/golang-repo-template
-GOBINS ?=	.
-NPM_PACKAGES ?=	.
+DOCKER_IMAGE ?=	moul/ssh.manfred.life
 
-all: test install
+all: build
 
 -include rules.mk
