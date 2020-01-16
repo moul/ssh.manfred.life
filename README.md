@@ -2,6 +2,10 @@
 
 :smile: ssh.manfred.life
 
+WIP
+
+<!--
+
 [![CircleCI](https://circleci.com/gh/moul/ssh.manfred.life.svg?style=shield)](https://circleci.com/gh/moul/ssh.manfred.life)
 [![GoDoc](https://godoc.org/moul.io/ssh.manfred.life?status.svg)](https://godoc.org/moul.io/ssh.manfred.life)
 [![License](https://img.shields.io/badge/license-Apache--2.0%20%2F%20MIT-%2397ca00.svg)](https://github.com/moul/ssh.manfred.life/blob/master/COPYRIGHT)
@@ -40,6 +44,8 @@ $ brew install moul/moul/ssh.manfred.life
 ### Download releases
 
 https://github.com/moul/ssh.manfred.life/releases
+
+-->
 
 ## License
 
