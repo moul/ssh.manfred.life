@@ -1,31 +1,9 @@
-# dynamic config
-ARG             BUILD_DATE
-ARG             VCS_REF
-ARG             VERSION
+FROM    golang:alpine
 
-# build
-FROM            golang:1.13-alpine as builder
-RUN             apk add --no-cache git gcc musl-dev make
-ENV             GO111MODULE=on
-WORKDIR         /go/src/moul.io/golang-repo-template
-COPY            go.* ./
-RUN             go mod download
-COPY            . ./
-RUN             make install
+RUN     apk add --no-cache links git openssh-keygen
+RUN     go get github.com/gliderlabs/sshfront
 
-# minimalist runtime
-FROM alpine:3.11
-LABEL           org.label-schema.build-date=$BUILD_DATE \
-                org.label-schema.name="golang-repo-template" \
-                org.label-schema.description="" \
-                org.label-schema.url="https://moul.io/golang-repo-template/" \
-                org.label-schema.vcs-ref=$VCS_REF \
-                org.label-schema.vcs-url="https://github.com/moul/golang-repo-template" \
-                org.label-schema.vendor="Manfred Touron" \
-                org.label-schema.version=$VERSION \
-                org.label-schema.schema-version="1.0" \
-                org.label-schema.cmd="docker run -i -t --rm moul/golang-repo-template" \
-                org.label-schema.help="docker exec -it $CONTAINER golang-repo-template --help"
-COPY            --from=builder /go/bin/golang-repo-template /bin/
-ENTRYPOINT      ["/bin/golang-repo-template"]
-#CMD             []
+CMD     ssh-keygen -b 2048 -t rsa -f /tmp/privkey -q -N "" \
+ &&     sshfront -d -k /tmp/privkey -p 2222 -- links https://manfred.life
+
+EXPOSE  2222
